@@ -22,8 +22,6 @@ export const LocationContextProvider = ({ children }) => {
       .then((result) => {
         setIsLoading(false);
         setLocation(result);
-        console.log(result);
-        console.log("location", location);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -31,6 +29,9 @@ export const LocationContextProvider = ({ children }) => {
       });
   };
 
+  // useEffect(() => {
+  //   onSearch(keyword);
+  // }, []);
   return (
     <LocationContext.Provider
       value={{
@@ -39,6 +40,10 @@ export const LocationContextProvider = ({ children }) => {
         location,
         search: onSearch,
         keyword,
+        setError,
+        setIsLoading,
+        setKeyword,
+        setLocation,
       }}
     >
       {children}

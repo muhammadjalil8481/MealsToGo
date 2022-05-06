@@ -4,6 +4,7 @@ import { SvgXml } from "react-native-svg";
 import star from "../../../../assets/star";
 import openNow from "../../../../assets/openNow";
 import { TextComponent } from "../../../Components/Typography/text_Component";
+import { FavouriteIcon } from "../../../Components/Favourite_Icon";
 import {
   Styled_CardCover,
   Styled_Card,
@@ -26,9 +27,11 @@ export const RestaurantInfoCard = ({ Restaurant = {} }) => {
       "https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg",
     ],
     address = "100 Food Street",
+    vicinity,
     isOpenNow = true,
     isClosedTemporarily = false,
     rating = 4.2,
+    place_id,
   } = Restaurant;
 
   const ratingArray = new Array(Math.floor(rating)).fill(undefined);
@@ -36,13 +39,16 @@ export const RestaurantInfoCard = ({ Restaurant = {} }) => {
   return (
     <View>
       <Styled_Card elevation={5}>
-        <Styled_CardCover source={{ uri: photos[0] }} />
+        <View>
+          <FavouriteIcon restaurant={Restaurant} />
+          <Styled_CardCover source={{ uri: photos[0] }} />
+        </View>
         <Styled_Info>
           <TextComponent variant="label">{name}</TextComponent>
           <Styled_svg>
             <Styled_Rating>
-              {ratingArray.map(() => (
-                <SvgXml xml={star} />
+              {ratingArray.map((_, i) => (
+                <SvgXml xml={star} key={`star-${place_id}-${i}`} />
               ))}
             </Styled_Rating>
             <Styled_OpenStatus>

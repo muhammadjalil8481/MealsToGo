@@ -3,12 +3,8 @@ import styled from "styled-components/native";
 import { Searchbar } from "react-native-paper";
 import { View } from "react-native";
 import { LocationContext } from "../../../Services/Location/location.context";
-import {
-  locationRequest,
-  locationTransform,
-} from "../../../Services/Location/location.service";
 
-export const Search = ({ isFavToggled, setIsFavToggled }) => {
+export const Search = () => {
   const { keyword, search } = useContext(LocationContext);
   const [searchKeyword, setSearchKeyword] = useState(keyword);
 
@@ -22,11 +18,10 @@ export const Search = ({ isFavToggled, setIsFavToggled }) => {
   return (
     <Styled_Search>
       <Searchbar
-        icon={isFavToggled ? "heart" : "heart-outline"}
-        onIconPress={() => setIsFavToggled(!isFavToggled)}
         placeholder="Search for Location"
         value={searchKeyword}
         onChangeText={(text) => setSearchKeyword(text)}
+        icon="map"
         onSubmitEditing={() => {
           search(searchKeyword);
         }}
@@ -37,5 +32,6 @@ export const Search = ({ isFavToggled, setIsFavToggled }) => {
 
 const Styled_Search = styled(View)`
   padding: ${(props) => props.theme.space[3]};
-  padding-bottom: 5px;
+  position: absolute;
+  width: 100%;
 `;

@@ -12,6 +12,7 @@ export const locationRequest = (searchedLocation) => {
 export const locationTransform = (data) => {
   const camelizedResult = camelize(data);
   const { geometry = {} } = camelizedResult.results[0];
+  const { viewport } = geometry;
   const { lat, lng } = geometry.location;
-  return { lat, lng };
+  return { lat, lng, viewport };
 };

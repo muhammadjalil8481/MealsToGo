@@ -29,18 +29,20 @@ export const RestaurantsContextProvider = ({ children }) => {
           setIsLoading(false);
           setError(error);
         });
-    }, 2000);
+    }, 1000);
   };
 
   useEffect(() => {
-    // const locationString = `${location.lat},${location.lng}`;
-    // console.log(locationString);
-    // retrieveRestaurants(locationString);
-    retrieveRestaurants("51.219448,4.402464");
+    const locationString = location
+      ? `${location.lat},${location.lng}`
+      : "37.7749295,-122.4194155";
+    retrieveRestaurants(locationString);
   }, []);
 
   return (
-    <RestaurantsContext.Provider value={{ restaurants, isLoading, error }}>
+    <RestaurantsContext.Provider
+      value={{ restaurants, isLoading, error, retrieveRestaurants, location }}
+    >
       {children}
     </RestaurantsContext.Provider>
   );
